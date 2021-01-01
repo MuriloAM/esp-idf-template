@@ -32,16 +32,48 @@
 // Outros
 #include "main.h"
 
+void vTaskCopy(void *pvParameters)
+{
+    unsigned int cnt = 0;
+    ESP_LOGI("vTaskCopy", "task started");
+    for(;;) {
+        cnt ++;
+        ESP_LOGI("vTaskCopy", "runTime %d\tCPU_ID:%d", cnt, xPortGetCoreID());
+        vTaskDelay(100/portTICK_PERIOD_MS);
+    }
+}
+
 
 /**
  * main aplication.
  */
 void app_main(void)
 {
-    int i = 0;
-    while (1) {
-        printf("[%d] Hello world!\n", i);
-        i++;
-        vTaskDelay(5000 / portTICK_PERIOD_MS);
-    }
+    xTaskCreatePinnedToCore (
+            vTaskCopy,
+            "vTaskCopy",
+            4096,
+            NULL,
+            5,
+            NULL,
+            PRO_CPU_NUM
+    );
+    xTaskCreatePinnedToCore (
+            vTaskCopy,
+            "vTaskCopy",
+            4096,
+            NULL,
+            5,
+            NULL,
+            APP_CPU_NUM
+    );
+    xTaskCreatePinnedToCore (
+            vTaskCopy,
+            "vTaskCopy",
+            4096,
+            NULL,
+            5,
+            NULL,
+            tskNO_AFFINITY
+    );
 }

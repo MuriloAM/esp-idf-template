@@ -1,4 +1,6 @@
 {
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
     "version": "2.0.0",
     "tasks": [
         {
@@ -7,9 +9,23 @@
             "isBackground": true,
             "options": {
                 "cwd": "${workspaceFolder}"
-                },
-            "command" : "idf.py build",
-            "group":{
+            },
+            "command": "idf.py build",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "ESP32 size",
+            "type": "shell",
+            "isBackground": true,
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "command": "idf.py size",
+            "group": {
                 "kind": "build",
                 "isDefault": true
             }
@@ -20,9 +36,9 @@
             "isBackground": true,
             "options": {
                 "cwd": "${workspaceFolder}"
-                },
-            "command" : "idf.py clean",
-            "group":{
+            },
+            "command": "idf.py clean",
+            "group": {
                 "kind": "build",
                 "isDefault": true
             }
@@ -33,10 +49,9 @@
             "isBackground": true,
             "options": {
                 "cwd": "${workspaceFolder}"
-                },
-            // set correctly COMx port to flash ESP32
-            "command" : "idf.py -p COM4 flash",
-            "group":{
+            },
+            "command": "idf.py -p COM4 flash",
+            "group": {
                 "kind": "build",
                 "isDefault": true
             }
@@ -47,10 +62,9 @@
             "isBackground": true,
             "options": {
                 "cwd": "${workspaceFolder}"
-                },
-            // set correctly COMx port to flash ESP32 and open monitor.
-            "command" : "idf.py -p COM4 flash monitor",
-            "group":{
+            },
+            "command": "idf.py -p COM4 flash monitor",
+            "group": {
                 "kind": "build",
                 "isDefault": true
             }
@@ -61,9 +75,9 @@
             "isBackground": true,
             "options": {
                 "cwd": "${workspaceFolder}"
-                },
-            "command" : "idf.py fullclean",
-            "group":{
+            },
+            "command": "idf.py fullclean",
+            "group": {
                 "kind": "build",
                 "isDefault": true
             }
@@ -74,10 +88,9 @@
             "isBackground": true,
             "options": {
                 "cwd": "${workspaceFolder}"
-                },
-            // set correctly COMx port to open monitor.
-            "command" : "idf.py -p COM4 monitor",
-            "group":{
+            },
+            "command": "idf.py -p COM4 monitor",
+            "group": {
                 "kind": "build",
                 "isDefault": true
             }
@@ -88,8 +101,8 @@
             "isBackground": true,
             "options": {
                 "cwd": "${workspaceFolder}"
-                },
-            "command" : "openocd -f interface/jlink.cfg -f board/esp-wroom-32.cfg"
+            },
+            "command": "openocd -f interface/jlink.cfg -f board/esp-wroom-32.cfg"
         }
     ]
 }
